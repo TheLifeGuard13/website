@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'website'
+    'website',
+    'clients',
+    'mailing',
+    'messages',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'website',
         'USER': 'postgres',
-        'PASSWORD': '-8Nb7AL1F7'
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD')
     }
 }
 
@@ -131,3 +137,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('USER_MAIL')
+EMAIL_HOST_PASSWORD = os.getenv('USER_MAIL_PASSWORD')
+EMAIL_USE_SSL = True
