@@ -2,4 +2,5 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'website/homepage.html')
+    context = {'title': 'Главная страница'}
+    return render(request, 'website/homepage.html', context=context)
