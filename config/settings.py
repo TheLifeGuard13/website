@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'clients',
     'mailing',
     'letters',
+    'logstatus'
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('USER_MAIL')
 EMAIL_HOST_PASSWORD = os.getenv('USER_MAIL_PASSWORD')
 EMAIL_USE_SSL = True
+
+NULLABLE = {'null': True, 'blank': True}

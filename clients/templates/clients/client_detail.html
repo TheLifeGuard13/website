@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'website/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ object.name|title }}</h1>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-body">
+                <img class="card-img-top" src="{{ object.avatar }}">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Имэйл: {{ object.email }}</li>
+                    <li>Дата создания: {{ object.created_at }}</li>
+                    <li>Комментарий: {{ object.comment }}</li>
+                </ul>
+                <div class="mb-3">
+                    <a href="{% url 'clients:update_client' object.pk %}" class="w-100 btn btn-lg btn-outline-primary">Редактировать</a>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'clients:delete_client' object.pk %}" class="w-100 btn btn-lg btn-outline-primary">Удалить</a>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'clients:clients_page' %}" class="w-100 btn btn-lg btn-outline-primary">Обратно</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

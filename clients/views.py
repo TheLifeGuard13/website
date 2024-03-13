@@ -24,7 +24,7 @@ class ClientDetailView(DetailView):
 
 class ClientCreateView(CreateView):
     model = Client
-    fields = ('email', 'name', 'avatar', 'created_at', 'comment',)
+    fields = ('email', 'name', 'avatar', 'comment',)
     success_url = reverse_lazy('clients:clients_page')
 
     def get_context_data(self, **kwargs):
@@ -35,7 +35,7 @@ class ClientCreateView(CreateView):
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = ('email', 'name', 'avatar', 'created_at', 'comment',)
+    fields = ('email', 'name', 'avatar', 'comment',)
 
     def get_success_url(self):
         return reverse('clients:view_client', args=[self.kwargs.get('pk')])
@@ -48,7 +48,7 @@ class ClientUpdateView(UpdateView):
 
 class ClientDeleteView(DeleteView):
     model = Client
-    success_url = reverse_lazy('clients:blog_homepage')
+    success_url = reverse_lazy('clients:clients_page')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'website/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Добавить/редактировать клиента</h1>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Добавление/редактирование клиента</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="mb-3">
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Отправить</button>
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'clients:clients_page' %}"
+                           class="w-100 btn btn-lg btn-outline-primary">Обратно</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -25,4 +25,5 @@ urlpatterns = [
     # path('mailing/', include('mailing.urls', namespace='mailing')),
     path('clients/', include('clients.urls', namespace='clients')),
     path('letters/', include('letters.urls', namespace='letters')),
+    # path('logstatus/', include('logstatus.urls', namespace='logstatus')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
