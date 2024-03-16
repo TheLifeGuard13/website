@@ -11,6 +11,9 @@
                     <h6 class="my-0 fw-normal text text-truncate">{{ object|capfirst }}</h6>
                 </div>
                 <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Дата создания: {{ object.created_at|date:"d/m/Y" }}</li>
+                    </ul>
                     <a href="{% url 'letters:view_letter' object.pk %}" class="w-120 btn btn-lg btn-outline-primary">Подробнее</a>
                 </div>
             </div>

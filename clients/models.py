@@ -12,7 +12,7 @@ class Client(models.Model):
     created_at = models.DateField(**NULLABLE, auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
-        return f'{self.email} ({self.name})'
+        return f'{self.email}'
 
     class Meta:
         verbose_name = 'клиент'

@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h6 class="card-title pricing-card-title">{{ object.email }}</h6>
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>{{ object.created_at }}</li>
+                        <li>{{ object.created_at|date:"d/m/Y" }}</li>
                     </ul>
                     <a href="{% url 'clients:view_client' object.pk %}" class="w-120 btn btn-lg btn-outline-primary">Подробнее</a>
                 </div>

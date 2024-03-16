@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from logstatus.models import LogMessage
+
+
+class LogMessageListView(ListView):
+    model = LogMessage
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Логи'
+        return context

@@ -1,0 +1,33 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<main>
+    <div class="row row-cols-1 row-cols-md-5 mb-5 text-center">
+        {% for object in object_list %}
+        <div class="col">
+            <div class="card mb-2 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-2 text-white bg-primary border-primary">
+                    <h6 class="my-0 fw-normal text text-truncate">{{ object.id_mailing.name|title }}</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title pricing-card-title">Время попытки: {{ object.last_try|date:"d/m/Y" }} {{ object.last_try|time:"H:i" }}</h6>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Статус: {{ object.sending_status }}</li>
+                        <li>Ответ сервера: {{ object.server_answer }}</li>
+                    </ul>
+
+                    <div class="mb-3">
+                        <a href="{% url 'mailing:mailing_page' %}"
+                           class="w-120 btn btn-lg btn-outline-primary">Обратно</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</main>
+
+{% endblock %}

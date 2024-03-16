@@ -9,7 +9,7 @@ class LetterListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Письма-рассылки'
+        context['title'] = 'Письма'
         return context
 
 
@@ -29,7 +29,7 @@ class LetterCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Добавление письма-рассылки'
+        context['title'] = 'Добавление письма'
         return context
 
 
@@ -42,7 +42,7 @@ class LetterUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Обновление письма-рассылки'
+        context['title'] = 'Обновление письма'
         return context
 
 
@@ -52,6 +52,6 @@ class LetterDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Удаление письма-рассылки'
+        context['title'] = 'Удаление письма'
         return context
 
