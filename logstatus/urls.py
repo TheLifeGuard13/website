@@ -6,5 +6,5 @@ from logstatus.views import LogMessageListView
 app_name = LogstatusConfig.name
 
 urlpatterns = [
-    path('', LogMessageListView.as_view(), name='logs_page')
+    path('view_log/<int:pk>/', LogMessageListView.as_view(), name='logs_page')
 ]
