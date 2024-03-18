@@ -11,7 +11,7 @@
         <div class="card mb-4 rounded-3 shadow-sm">
             <div class="card-body">
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>Письмо: {{ object.letter }}</li>
+                    <li>Тема письма: {{ object.letter }}</li>
                     <li>Время рассылки: {{ object.sending_time|time:"H:i" }}</li>
                     <li>Период: {{ object.period }}</li>
                     <li>Время начала: {{ object.start_datetime|date:"d/m/Y, H:i" }}</li>

@@ -1,7 +1,6 @@
 from django.views.generic import ListView
 
 from logstatus.models import LogMessage
-from mailing.models import Mailing
 
 
 class LogMessageListView(ListView):
@@ -14,5 +13,5 @@ class LogMessageListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(id_mailing=kwargs['pk'])
+        # queryset = queryset.filter()
         return queryset

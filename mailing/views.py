@@ -10,9 +10,9 @@ from mailing.services import start_mailing
 class MailingForm(ModelForm):
     class Meta:
         model = Mailing
-        fields = ('name', 'client_emails', 'period', 'letter', 'sending_time', 'start_datetime', 'end_datetime',)
+        fields = ('name', 'client_emails', 'period', 'letter', 'first_sending_time', 'start_datetime', 'end_datetime',)
         widgets = {
-            'sending_time': TimeInput(attrs={'type': 'time'}),
+            'first_sending_time': DateTimeInput(attrs={'type': 'datetime-local'}),
             'start_datetime': DateTimeInput(attrs={'type': 'datetime-local'}),
             'end_datetime': DateTimeInput(attrs={'type': 'datetime-local'}),
         }
@@ -37,16 +37,15 @@ class MailingDetailView(DetailView):
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
-        header = self.object.letter.letter_header
-        body = self.object.letter.letter_body
-        mails = list(self.object.client_emails.all().values_list('email', flat=True))
-        if self.object.is_active:
-            start_mailing(header, body, mails, self.object)
+        # if self.object.status == 'Готовится':
+        #     start_mailing(self.object)
+        # self.object.status = 'Успешно'
+        # self.object.save()
         return self.object
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.object
+        context['title'] = self.object.name
         return context
 
 
