@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from clients.forms import ClientForm
 from clients.models import Client
 
 
@@ -24,7 +25,7 @@ class ClientDetailView(DetailView):
 
 class ClientCreateView(CreateView):
     model = Client
-    fields = ('email', 'name', 'avatar', 'comment',)
+    form_class = ClientForm
     success_url = reverse_lazy('clients:clients_page')
 
     def get_context_data(self, **kwargs):
@@ -35,7 +36,7 @@ class ClientCreateView(CreateView):
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = ('email', 'name', 'avatar', 'comment',)
+    form_class = ClientForm
 
     def get_success_url(self):
         return reverse('clients:view_client', args=[self.kwargs.get('pk')])

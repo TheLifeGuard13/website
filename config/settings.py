@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'clients',
     'mailing',
     'letters',
-    'logstatus'
+    'logstatus',
+    'blog',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,6 @@ NULLABLE = {'null': True, 'blank': True}
 
 APSCHEDULER_DATETIME_FORMAT = "d/m/Y, H:i"
 APSCHEDULER_RUN_NOW_TIMEOUT = 15  # Seconds
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'

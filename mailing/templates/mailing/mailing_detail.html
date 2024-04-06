@@ -12,7 +12,7 @@
             <div class="card-body">
                 <ul class="list-unstyled mt-3 mb-4">
                     <li>Тема письма: {{ object.letter }}</li>
-                    <li>Время рассылки: {{ object.sending_time|time:"H:i" }}</li>
+                    <li>Время рассылки: {{ object.first_sending_time|date:"d/m/Y, H:i" }}</li>
                     <li>Период: {{ object.period }}</li>
                     <li>Время начала: {{ object.start_datetime|date:"d/m/Y, H:i" }}</li>
                     <li>Время конца: {{ object.end_datetime|date:"d/m/Y, H:i" }}</li>

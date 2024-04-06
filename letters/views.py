@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from letters.forms import LetterForm
 from letters.models import Letter
 
 
@@ -24,7 +25,7 @@ class LetterDetailView(DetailView):
 
 class LetterCreateView(CreateView):
     model = Letter
-    fields = ('letter_header', 'letter_body',)
+    form_class = LetterForm
     success_url = reverse_lazy('letters:letters_page')
 
     def get_context_data(self, **kwargs):
@@ -35,7 +36,7 @@ class LetterCreateView(CreateView):
 
 class LetterUpdateView(UpdateView):
     model = Letter
-    fields = ('letter_header', 'letter_body',)
+    form_class = LetterForm
 
     def get_success_url(self):
         return reverse('letters:view_letter', args=[self.kwargs.get('pk')])

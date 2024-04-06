@@ -26,27 +26,3 @@ def start_mailing(class_obj):
         LogMessage.objects.create(sending_status=server_response, id_mailing=class_obj)
     except smtplib.SMTPException as e:
         LogMessage.objects.create(sending_status=e, id_mailing=class_obj)
-
-
-def daily_tasks():
-    mailings = Mailing.objects.filter(period="Ежедневно", status="Готовится")
-    print(f'Это ежедневные задачи {mailings}')
-    if mailings.exists():
-        for mailing in mailings:
-            start_mailing(mailing)
-
-
-# def weekly_tasks():
-#     mailings = Mailing.objects.filter(period="Еженедельно", status="Готовится")
-#     print(f'Это еженедельные задачи {mailings}')
-#     if mailings.exists():
-#         for mailing in mailings:
-#             start_mailing(mailing)
-
-
-# def monthly_tasks():
-#     mailings = Mailing.objects.filter(period="Ежемесячно", status="Готовится")
-#     print(f'Это ежемесячные задачи {mailings}')
-#     if mailings.exists():
-#         for mailing in mailings:
-#             start_mailing(mailing)

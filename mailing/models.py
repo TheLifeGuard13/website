@@ -1,23 +1,31 @@
 from django.db import models
 
 from clients.models import Client
+from config import settings
 from config.settings import NULLABLE
 from letters.models import Letter
 
-PERIOD_CHOICES = {
-    'Ежедневно': 'Ежедневно',
-    'Еженедельно': 'Еженедельно',
-    'Ежемесячно': 'Ежемесячно'
-}
-
-STATUS_CHOICES = {
-    'Готовится': 'Готовится',
-    'Успешно': 'Успешно',
-    'Безуспешно': 'Безуспешно'
-}
-
 
 class Mailing(models.Model):
+    DAILY = "Ежедневно"
+    WEEKLY = "Еженедельно"
+    MONTHLY = "Ежемесячно"
+
+    PERIOD_CHOICES = {
+        DAILY: 'Ежедневно',
+        WEEKLY: 'Еженедельно',
+        MONTHLY: 'Ежемесячно'
+    }
+
+    CREATED = 'Создана'
+    STARTED = 'Запущена'
+    COMPLETED = 'Завершена'
+
+    STATUS_CHOICES = {
+        CREATED: 'Создана',
+        STARTED: 'Запущена',
+        COMPLETED: 'Завершена'
+    }
 
     name = models.CharField(max_length=150, verbose_name='Имя рассылки')
     client_emails = models.ManyToManyField(Client, verbose_name='Имэйлы')
@@ -30,6 +38,7 @@ class Mailing(models.Model):
     status = models.CharField(default='Готовится', max_length=20, **NULLABLE, choices=STATUS_CHOICES, verbose_name='Статус')
 
     is_active = models.BooleanField(default=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Владелец')
 
     def __str__(self):
         return (f'{self.name}, {self.client_emails}, {self.letter},'

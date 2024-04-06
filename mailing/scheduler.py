@@ -4,7 +4,20 @@ from django.conf import settings
 from apscheduler.schedulers.blocking import BlockingScheduler
 from django_apscheduler.jobstores import DjangoJobStore
 
-from mailing.services import daily_tasks
+from mailing.models import Mailing
+from mailing.services import start_mailing
+
+
+def daily_tasks(some_func):
+    start_mailing(some_func())
+
+
+def new_func():
+    mailings = Mailing.objects.filter(period="Ежедневно", status="Готовится")
+    print(f'Это ежедневные задачи {mailings}')
+    if mailings.exists():
+        for mailing in mailings:
+            return mailing
 
 
 def start_scheduler():
@@ -14,9 +27,10 @@ def start_scheduler():
 
     scheduler.add_job(
         daily_tasks,
-        trigger=CronTrigger(second="*/30"),
+        trigger=CronTrigger(start_date=new_func().start_datetime, end_date=new_func().end_datetime),
+        args=[new_func],
         id="daily_tasks",
-        max_instances=1,
+        max_instances=2,
         replace_existing=True,
     )
 

@@ -3,7 +3,7 @@
 {% block content %}
 
 <main>
-    <div class="row row-cols-1 row-cols-md-5 mb-5 text-center">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
         {% for object in object_list %}
         <div class="col">
             <div class="card mb-2 rounded-3 shadow-sm border-primary">
@@ -11,7 +11,7 @@
                     <h6 class="my-0 fw-normal text text-truncate">{{ object.name|title }}</h6>
                 </div>
                 <div class="card-body">
-                    <h6 class="card-title pricing-card-title">Время рассылки: {{ object.sending_time|time:"H:i" }}</h6>
+                    <h6 class="card-title pricing-card-title">Время рассылки: {{ object.first_sending_time|date:"d/m/Y, H:i" }}</h6>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Периодичность: {{ object.period }}</li>
                         <li>Статус: {{ object.status }}</li>
