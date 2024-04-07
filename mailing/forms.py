@@ -8,7 +8,7 @@ from website.forms import StyleFormMixin
 class MailingForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Mailing
-        exclude = ('owner', )
+        exclude = ('owner', 'status', )
         widgets = {
             'first_sending_time': DateTimeInput(attrs={'type': 'datetime-local'}),
             'start_datetime': DateTimeInput(attrs={'type': 'datetime-local'}),

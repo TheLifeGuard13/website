@@ -13,5 +13,5 @@ class LogMessageListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        # queryset = queryset.filter()
+        queryset = queryset.filter(id_mailing=self.kwargs.get('pk'))
         return queryset

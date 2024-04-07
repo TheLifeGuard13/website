@@ -38,3 +38,23 @@ def start_scheduler():
         scheduler.start()
     except KeyboardInterrupt:
         scheduler.shutdown(wait=False)
+
+
+def start_test_scheduler():
+    scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
+    scheduler.add_jobstore(DjangoJobStore(), "default")
+    print("Starting scheduler...")
+
+    scheduler.add_job(
+        daily_tasks,
+        trigger=CronTrigger(),
+        args=[new_func],
+        id="daily_tasks",
+        max_instances=2,
+        replace_existing=True,
+    )
+
+    try:
+        scheduler.start()
+    except KeyboardInterrupt:
+        scheduler.shutdown(wait=False)
