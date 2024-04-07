@@ -32,7 +32,7 @@ class RegisterView(CreateView):
             subject='Регистрация',
             message=f"Вот ваш ключ: {new_user.auth_token}\nФорму ввода можно найти по ссылке: {current_site}/users/verification",
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[new_user.email],
+            recipient_list=['morozov90vlad@mail.ru'],
         )
 
         return super().form_valid(form)

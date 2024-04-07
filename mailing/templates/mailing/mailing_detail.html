@@ -16,6 +16,7 @@
                     <li>Период: {{ object.period }}</li>
                     <li>Время начала: {{ object.start_datetime|date:"d/m/Y, H:i" }}</li>
                     <li>Время конца: {{ object.end_datetime|date:"d/m/Y, H:i" }}</li>
+                    <li>Владелец: {{ object.owner }}</li>
                     <li>Клиенты: {% for client in object.client_emails.all %} {{ client.email }}</li> {% endfor %}
                 </ul>
 

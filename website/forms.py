@@ -4,5 +4,5 @@ class StyleFormMixin:
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
-            # if field_name == 'is_actual':
-            #     field.widget.attrs['class'] = 'form-check-input'
+            if field_name == 'is_active':
+                field.widget.attrs['class'] = 'form-check-input'

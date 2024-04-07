@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import Http404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -5,13 +7,23 @@ from letters.forms import LetterForm
 from letters.models import Letter
 
 
-class LetterListView(ListView):
+class LetterListView(LoginRequiredMixin, ListView):
     model = Letter
+    login_url = reverse_lazy('website:homepage')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Письма'
         return context
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        user = self.request.user
+        if user.is_superuser:
+            queryset = queryset
+        else:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
 class LetterDetailView(DetailView):
@@ -22,8 +34,15 @@ class LetterDetailView(DetailView):
         context['title'] = self.object
         return context
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        user = self.request.user
+        if not user.is_superuser and self.object.owner != user:
+            raise Http404('Доступ запрещен')
+        return self.object
 
-class LetterCreateView(CreateView):
+
+class LetterCreateView(UserPassesTestMixin, CreateView):
     model = Letter
     form_class = LetterForm
     success_url = reverse_lazy('letters:letters_page')
@@ -32,6 +51,15 @@ class LetterCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Добавление письма'
         return context
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+    def test_func(self):
+        return not self.request.user.groups.filter(name="manager")
 
 
 class LetterUpdateView(UpdateView):
@@ -56,3 +84,9 @@ class LetterDeleteView(DeleteView):
         context['title'] = 'Удаление письма'
         return context
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        user = self.request.user
+        if not user.is_superuser and self.object.owner != user:
+            raise Http404('Доступ запрещен')
+        return self.object

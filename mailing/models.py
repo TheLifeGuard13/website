@@ -35,10 +35,10 @@ class Mailing(models.Model):
     start_datetime = models.DateTimeField(**NULLABLE, verbose_name='Время начала')
     end_datetime = models.DateTimeField(**NULLABLE, verbose_name='Время конца')
     created_at = models.DateTimeField(**NULLABLE, auto_now_add=True, verbose_name='Время создания')
-    status = models.CharField(default='Готовится', max_length=20, **NULLABLE, choices=STATUS_CHOICES, verbose_name='Статус')
+    status = models.CharField(default='Создана', max_length=20, **NULLABLE, choices=STATUS_CHOICES, verbose_name='Статус')
 
     is_active = models.BooleanField(default=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Владелец')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Владелец')
 
     def __str__(self):
         return (f'{self.name}, {self.client_emails}, {self.letter},'
@@ -48,3 +48,5 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = 'рассылка'
         verbose_name_plural = 'рассылки'
+
+        permissions = [('set_inactive', 'Can block mailing')]
