@@ -1,15 +1,11 @@
-import random
-import string
-
 from django.contrib.auth import logout
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, TemplateView
 
-from config import settings
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
+from users.services import get_generated_key, send_key_mail, send_password_mail
 
 
 def logout_view(request):
@@ -26,14 +22,9 @@ class RegisterView(CreateView):
         new_user = form.save()
         current_site = self.request.get_host()
         new_user.is_active = False
-        new_user.auth_token = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        new_user.auth_token = get_generated_key(5)
         new_user.save()
-        send_mail(
-            subject='Регистрация',
-            message=f"Вот ваш ключ: {new_user.auth_token}\nФорму ввода можно найти по ссылке: {current_site}/users/verification",
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=['morozov90vlad@mail.ru'],
-        )
+        send_key_mail(new_user.auth_toke, current_site, new_user.email)
 
         return super().form_valid(form)
 
@@ -82,13 +73,8 @@ class RestorePassword(TemplateView):
     def post(self, request, *args, **kwargs):
         mail = request.POST.get("email")
         user = get_object_or_404(User, email=mail)
-        new_password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
-        send_mail(
-                    subject="Смена пароля",
-                    message=f'Ваш новый пароль: {new_password}',
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[user.email],
-                )
+        new_password = get_generated_key(15)
+        send_password_mail(new_password, user.email)
         user.set_password(new_password)
         user.save()
         return redirect('users:login')

@@ -6,13 +6,6 @@ from django.core.mail import send_mail
 from logstatus.models import LogMessage
 
 
-def is_date_in_range(obj):
-    now = timezone.localtime(timezone.now())
-    if obj.start_datetime < now < obj.end_datetime:
-        return True
-    return False
-
-
 def start_mailing(class_obj):
     try:
         send_mail(

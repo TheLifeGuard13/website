@@ -1,8 +1,7 @@
+from django.conf import settings
 from django.db import models
 
-from config import settings
-
-NULLABLE = {'null': True, 'blank': True}
+from config.settings import NULLABLE
 
 
 class Client(models.Model):
