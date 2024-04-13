@@ -15,6 +15,8 @@
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Периодичность: {{ object.period }}</li>
                         <li>Статус: {{ object.status }}</li>
+                        <li>Владелец: {{ object.owner }}</li>
+                        <li>След рассылка: {{ object.next_sending_time|date:"d/m/Y, H:i"|default:'Не заполнено'}}</li>
                     </ul>
 
                     <div class="mb-3">
