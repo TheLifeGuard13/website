@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.decorators.cache import cache_page
 
 from website.apps import WebsiteConfig
 from website.views import ManagerListView, WebsiteListView, toggle_activity

@@ -16,6 +16,7 @@ class UserRegisterForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     """Класс профиля пользователя"""
+
     class Meta:
         model = User
         fields = ("first_name", "last_name", "email", "phone", "country", "avatar")

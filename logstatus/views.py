@@ -9,8 +9,9 @@ from logstatus.models import LogMessage
 
 class LogMessageListView(LoginRequiredMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = LogMessage
-    login_url = reverse_lazy('users:login')
+    login_url = reverse_lazy("users:login")
 
     def get_context_data(self, **kwargs: typing.Any) -> typing.Any:
         context = super().get_context_data(**kwargs)

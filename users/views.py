@@ -18,6 +18,7 @@ def logout_view(request: typing.Any) -> typing.Any:
 
 class RegisterView(CreateView):
     """Контроллер для регистрации пользователя"""
+
     model = User
     form_class = UserRegisterForm
     template_name = "users/register.html"
@@ -43,6 +44,7 @@ class RegisterView(CreateView):
 
 class ProfileView(UpdateView):
     """Контроллер для просмотра профиля пользователя"""
+
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy("users:profile")
@@ -74,6 +76,7 @@ class Verification(TemplateView):
 
 class RestorePassword(TemplateView):
     """Контроллер для восстановления пароля пользователя"""
+
     def get(self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         return render(request, "users/new_password.html")
 

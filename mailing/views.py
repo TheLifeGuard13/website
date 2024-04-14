@@ -12,6 +12,7 @@ from mailing.models import Mailing
 
 class MailingListView(LoginRequiredMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = Mailing
     login_url = reverse_lazy("website:homepage")
 
@@ -32,6 +33,7 @@ class MailingListView(LoginRequiredMixin, ListView):
 
 class MailingDetailView(DetailView):
     """Контроллер для просмотра сущности"""
+
     model = Mailing
 
     def get_object(self, queryset: typing.Any = None) -> typing.Any:
@@ -49,6 +51,7 @@ class MailingDetailView(DetailView):
 
 class MailingCreateView(CreateView):
     """Контроллер для создания сущности"""
+
     model = Mailing
     form_class = MailingForm
     success_url = reverse_lazy("mailing:mailing_page")
@@ -70,6 +73,7 @@ class MailingCreateView(CreateView):
 
 class MailingUpdateView(LoginRequiredMixin, UpdateView):
     """Контроллер для изменения сущности"""
+
     model = Mailing
     form_class = MailingForm
     login_url = reverse_lazy("website:homepage")
@@ -98,6 +102,7 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
 
 class MailingDeleteView(DeleteView):
     """Контроллер для удаления сущности"""
+
     model = Mailing
     success_url = reverse_lazy("mailing:mailing_page")
 

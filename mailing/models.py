@@ -8,7 +8,7 @@ from letters.models import Letter
 
 class Mailing(models.Model):
     """
-        Модель Рассылки
+    Модель Рассылки
     """
 
     name = models.CharField(max_length=150, verbose_name="Имя рассылки")

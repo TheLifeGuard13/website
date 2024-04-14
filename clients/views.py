@@ -11,6 +11,7 @@ from clients.models import Client
 
 class ClientListView(LoginRequiredMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = Client
     login_url = reverse_lazy("website:homepage")
 
@@ -31,6 +32,7 @@ class ClientListView(LoginRequiredMixin, ListView):
 
 class ClientDetailView(DetailView):
     """Контроллер для просмотра сущности"""
+
     model = Client
 
     def get_context_data(self, **kwargs: typing.Any) -> typing.Any:
@@ -48,6 +50,7 @@ class ClientDetailView(DetailView):
 
 class ClientCreateView(UserPassesTestMixin, CreateView):
     """Контроллер для создания сущности"""
+
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy("clients:clients_page")
@@ -69,6 +72,7 @@ class ClientCreateView(UserPassesTestMixin, CreateView):
 
 class ClientUpdateView(UpdateView):
     """Контроллер для изменения сущности"""
+
     model = Client
     form_class = ClientForm
 
@@ -90,6 +94,7 @@ class ClientUpdateView(UpdateView):
 
 class ClientDeleteView(DeleteView):
     """Контроллер для удаления сущности"""
+
     model = Client
     success_url = reverse_lazy("clients:clients_page")
 

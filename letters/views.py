@@ -11,6 +11,7 @@ from letters.models import Letter
 
 class LetterListView(LoginRequiredMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = Letter
     login_url = reverse_lazy("website:homepage")
 
@@ -31,6 +32,7 @@ class LetterListView(LoginRequiredMixin, ListView):
 
 class LetterDetailView(DetailView):
     """Контроллер для просмотра сущности"""
+
     model = Letter
 
     def get_context_data(self, **kwargs: typing.Any) -> typing.Any:
@@ -48,6 +50,7 @@ class LetterDetailView(DetailView):
 
 class LetterCreateView(UserPassesTestMixin, CreateView):
     """Контроллер для создания сущности"""
+
     model = Letter
     form_class = LetterForm
     success_url = reverse_lazy("letters:letters_page")
@@ -69,6 +72,7 @@ class LetterCreateView(UserPassesTestMixin, CreateView):
 
 class LetterUpdateView(UpdateView):
     """Контроллер для изменения сущности"""
+
     model = Letter
     form_class = LetterForm
 
@@ -83,6 +87,7 @@ class LetterUpdateView(UpdateView):
 
 class LetterDeleteView(DeleteView):
     """Контроллер для удаления сущности"""
+
     model = Letter
     success_url = reverse_lazy("letters:letters_page")
 

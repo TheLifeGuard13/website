@@ -28,7 +28,7 @@ def start_mailing(class_obj: typing.Any) -> typing.Any:
 def get_cache_mailing_count() -> typing.Any:
     """Функция для кеширования данных"""
     if settings.CASH_ENABLED:
-        key = 'mailings_count'
+        key = "mailings_count"
         mailings_count = cache.get(key)
         if mailings_count is None:
             mailings_count = Mailing.objects.all().count()
@@ -41,7 +41,7 @@ def get_cache_mailing_count() -> typing.Any:
 def get_cache_mailing_active() -> typing.Any:
     """Функция для кеширования данных"""
     if settings.CASH_ENABLED:
-        key = 'active_mailings_count'
+        key = "active_mailings_count"
         active_mailings_count = cache.get(key)
         if active_mailings_count is None:
             active_mailings_count = Mailing.objects.filter(is_active=True).count()
@@ -54,7 +54,7 @@ def get_cache_mailing_active() -> typing.Any:
 def get_cache_clients_count() -> typing.Any:
     """Функция для кеширования данных"""
     if settings.CASH_ENABLED:
-        key = 'clients_count'
+        key = "clients_count"
         clients_count = cache.get(key)
         if clients_count is None:
             clients_count = Client.objects.distinct().count()

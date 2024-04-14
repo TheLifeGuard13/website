@@ -6,8 +6,9 @@ from config.settings import NULLABLE
 
 class Client(models.Model):
     """
-        Модель Клиента
+    Модель Клиента
     """
+
     email = models.EmailField(verbose_name="Имэйл клиента")
     name = models.CharField(max_length=150, verbose_name="ФИО клиента")
     comment = models.TextField(**NULLABLE, verbose_name="Комментарий")

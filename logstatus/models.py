@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db import models
 
 from config.settings import NULLABLE
@@ -7,8 +6,9 @@ from mailing.models import Mailing
 
 class LogMessage(models.Model):
     """
-        Модель Лога
+    Модель Лога
     """
+
     SENT = "Успешно"
     FAIL = "Безуспешно"
 

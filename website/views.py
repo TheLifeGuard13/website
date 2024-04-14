@@ -6,14 +6,13 @@ from django.urls import reverse
 from django.views.generic import ListView
 
 from blog.models import Blog
-from clients.models import Client
-from mailing.models import Mailing
 from mailing.services import get_cache_clients_count, get_cache_mailing_active, get_cache_mailing_count
 from users.models import User
 
 
 class WebsiteListView(ListView):
     """Контроллер для просмотра сущностей"""
+
     model = Blog
     template_name = "website/homepage.html"
 
@@ -33,6 +32,7 @@ class WebsiteListView(ListView):
 
 class ManagerListView(UserPassesTestMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = User
     template_name = "website/manager.html"
 

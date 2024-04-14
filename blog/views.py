@@ -8,6 +8,7 @@ from blog.models import Blog
 
 class BlogListView(UserPassesTestMixin, ListView):
     """Контроллер для просмотра сущностей"""
+
     model = Blog
     template_name = "blog/index.html"
 
