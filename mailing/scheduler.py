@@ -1,4 +1,5 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
+from typing import Any
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -10,9 +11,10 @@ from mailing.models import Mailing
 from mailing.services import start_mailing
 
 
-def filter_mailing(obj):
+def filter_mailing(obj: Any) -> None:
+    """Функция записывает время следующей отправки в экземпляр класса рассылок с учетом логики,
+    и далее вызывает функцию рассылки для подходящих рассылок"""
     now = timezone.localtime(timezone.now())
-    print(now)
     if obj.start_datetime < now < obj.end_datetime:
 
         if not obj.next_sending_time:
@@ -42,7 +44,8 @@ def filter_mailing(obj):
         obj.save()
 
 
-def sending_tasks():
+def sending_tasks() -> None:
+    """Функция фильтрует экземпляры класса рассылок по статусу и передает в другую функцию"""
     mailings = Mailing.objects.filter(status__in=["Создана", "Запущена"])
     if mailings.exists():
         for mailing in mailings:
@@ -50,7 +53,8 @@ def sending_tasks():
                 filter_mailing(mailing)
 
 
-def start_scheduler():
+def start_scheduler() -> None:
+    """Функция запускает рассылки"""
     scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
     scheduler.add_jobstore(DjangoJobStore(), "default")
     print("Starting scheduler...")

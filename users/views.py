@@ -1,3 +1,5 @@
+import typing
+
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
@@ -8,17 +10,19 @@ from users.models import User
 from users.services import get_generated_key, send_key_mail, send_password_mail
 
 
-def logout_view(request):
+def logout_view(request: typing.Any) -> typing.Any:
+    """Контроллер для выхода из авторизации пользователя"""
     logout(request)
     return redirect("/")
 
 
 class RegisterView(CreateView):
+    """Контроллер для регистрации пользователя"""
     model = User
     form_class = UserRegisterForm
     template_name = "users/register.html"
 
-    def form_valid(self, form):
+    def form_valid(self, form: typing.Any) -> typing.Any:
         new_user = form.save()
         current_site = self.request.get_host()
         new_user.is_active = False
@@ -28,35 +32,37 @@ class RegisterView(CreateView):
 
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: typing.Any) -> typing.Any:
         context = super().get_context_data(**kwargs)
         context["title"] = "Регистрация"
         return context
 
-    def get_success_url(self):
+    def get_success_url(self) -> typing.Any:
         return reverse("users:verification")
 
 
 class ProfileView(UpdateView):
+    """Контроллер для просмотра профиля пользователя"""
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy("users:profile")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset: typing.Any = None) -> typing.Any:
         return self.request.user
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: typing.Any) -> typing.Any:
         context = super().get_context_data(**kwargs)
         context["title"] = "Мой профиль"
         return context
 
 
 class Verification(TemplateView):
+    """Контроллер для верификации пользователя"""
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         return render(request, "users/verification.html")
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         code = request.POST.get("auth_token")
         user = get_object_or_404(User, auth_token=code)
 
@@ -67,10 +73,11 @@ class Verification(TemplateView):
 
 
 class RestorePassword(TemplateView):
-    def get(self, request, *args, **kwargs):
+    """Контроллер для восстановления пароля пользователя"""
+    def get(self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         return render(request, "users/new_password.html")
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         mail = request.POST.get("email")
         user = get_object_or_404(User, email=mail)
         new_password = get_generated_key(15)

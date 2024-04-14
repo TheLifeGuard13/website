@@ -5,7 +5,9 @@ from config.settings import NULLABLE
 
 
 class Client(models.Model):
-
+    """
+        Модель Клиента
+    """
     email = models.EmailField(verbose_name="Имэйл клиента")
     name = models.CharField(max_length=150, verbose_name="ФИО клиента")
     comment = models.TextField(**NULLABLE, verbose_name="Комментарий")
@@ -15,7 +17,7 @@ class Client(models.Model):
         settings.AUTH_USER_MODEL, default="", on_delete=models.CASCADE, **NULLABLE, verbose_name="Владелец"
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.email}"
 
     class Meta:

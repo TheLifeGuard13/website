@@ -1,10 +1,12 @@
+import typing
+
 from django.core.management import BaseCommand, call_command
 
 
 class Command(BaseCommand):
     help = "Download fixtures to files from all apps"
 
-    def handle(self, *args, **options):
+    def handle(self, *args: typing.Any, **options: typing.Any) -> None:
         call_command("dumpdata", "auth", "-o", "website/fixtures/auth_data.json")
         call_command("dumpdata", "users", "-o", "website/fixtures/users_data.json")
         call_command("dumpdata", "blog", "-o", "website/fixtures/blog_data.json")

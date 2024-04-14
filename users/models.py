@@ -1,8 +1,13 @@
+from typing import List
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class User(AbstractUser):
+    """
+        Модель Пользователя
+    """
     username = None
     email = models.EmailField(unique=True, verbose_name="почта")
 
@@ -12,4 +17,4 @@ class User(AbstractUser):
     auth_token = models.CharField(max_length=30, default="", blank=True, null=True, verbose_name="ключ")
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: List[type] = []

@@ -6,6 +6,9 @@ from mailing.models import Mailing
 
 
 class LogMessage(models.Model):
+    """
+        Модель Лога
+    """
     SENT = "Успешно"
     FAIL = "Безуспешно"
 
@@ -18,7 +21,7 @@ class LogMessage(models.Model):
     last_try = models.DateTimeField(**NULLABLE, auto_now_add=True, verbose_name="Время последней попытки")
     sending_status = models.CharField(max_length=10, choices=LOG_CHOICES, verbose_name="Логстатус")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.last_try}, {self.id_mailing}, {self.sending_status}"
 
     class Meta:

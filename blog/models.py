@@ -16,7 +16,7 @@ class Blog(models.Model):
     slug = models.CharField(max_length=100, null=True, blank=True, verbose_name="Читабельная ссылка")
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Владелец")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.header}, {self.description}"
 
     class Meta:

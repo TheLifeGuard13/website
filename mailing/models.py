@@ -7,6 +7,9 @@ from letters.models import Letter
 
 
 class Mailing(models.Model):
+    """
+        Модель Рассылки
+    """
 
     name = models.CharField(max_length=150, verbose_name="Имя рассылки")
     client_emails = models.ManyToManyField(Client, verbose_name="Имэйлы")
@@ -24,7 +27,7 @@ class Mailing(models.Model):
     is_active = models.BooleanField(default=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name="Владелец")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"{self.name}, {self.client_emails}, {self.letter},"
             f"{self.start_datetime}, {self.end_datetime}, {self.created_at},"
