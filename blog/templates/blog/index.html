@@ -1,0 +1,28 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for object in object_list %}
+        <div class="col">
+            <div class="card mb-2 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-2 text-white bg-primary border-primary">
+                    <h6 class="my-0 fw-normal text text-truncate">{{ object.header|title }}</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title pricing-card-title">Картинка: {{ object.preview }}</h6>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Содержимое: {{ object.description }}</li>
+                        <li>Просмотров: {{ object.views_count }}</li>
+                        <li>Дата публикации: {{ object.published_at | date:"d/m/Y" }}</li>
+                        <li>Владелец: {{ object.owner }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}
