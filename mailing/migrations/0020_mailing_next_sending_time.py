@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mailing', '0019_alter_mailing_options'),
+        ("mailing", "0019_alter_mailing_options"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mailing',
-            name='next_sending_time',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='Время следующей рассылки'),
+            model_name="mailing",
+            name="next_sending_time",
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Время следующей рассылки"),
         ),
     ]

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from letters.forms import LetterForm
 from letters.models import Letter
@@ -9,11 +9,11 @@ from letters.models import Letter
 
 class LetterListView(LoginRequiredMixin, ListView):
     model = Letter
-    login_url = reverse_lazy('website:homepage')
+    login_url = reverse_lazy("website:homepage")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Письма'
+        context["title"] = "Письма"
         return context
 
     def get_queryset(self, *args, **kwargs):
@@ -31,25 +31,25 @@ class LetterDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.object
+        context["title"] = self.object
         return context
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         user = self.request.user
         if not user.is_superuser and self.object.owner != user:
-            raise Http404('Доступ запрещен')
+            raise Http404("Доступ запрещен")
         return self.object
 
 
 class LetterCreateView(UserPassesTestMixin, CreateView):
     model = Letter
     form_class = LetterForm
-    success_url = reverse_lazy('letters:letters_page')
+    success_url = reverse_lazy("letters:letters_page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Добавление письма'
+        context["title"] = "Добавление письма"
         return context
 
     def form_valid(self, form):
@@ -67,26 +67,26 @@ class LetterUpdateView(UpdateView):
     form_class = LetterForm
 
     def get_success_url(self):
-        return reverse('letters:view_letter', args=[self.kwargs.get('pk')])
+        return reverse("letters:view_letter", args=[self.kwargs.get("pk")])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Обновление письма'
+        context["title"] = "Обновление письма"
         return context
 
 
 class LetterDeleteView(DeleteView):
     model = Letter
-    success_url = reverse_lazy('letters:letters_page')
+    success_url = reverse_lazy("letters:letters_page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Удаление письма'
+        context["title"] = "Удаление письма"
         return context
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         user = self.request.user
         if not user.is_superuser and self.object.owner != user:
-            raise Http404('Доступ запрещен')
+            raise Http404("Доступ запрещен")
         return self.object

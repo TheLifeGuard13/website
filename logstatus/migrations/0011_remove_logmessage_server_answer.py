@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('logstatus', '0010_alter_logmessage_id_mailing'),
+        ("logstatus", "0010_alter_logmessage_id_mailing"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='logmessage',
-            name='server_answer',
+            model_name="logmessage",
+            name="server_answer",
         ),
     ]

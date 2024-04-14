@@ -7,20 +7,19 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Letter',
+            name="Letter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('letter_header', models.CharField(max_length=200, verbose_name='Тема письма')),
-                ('letter_body', models.TextField(verbose_name='Тело письма')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("letter_header", models.CharField(max_length=200, verbose_name="Тема письма")),
+                ("letter_body", models.TextField(verbose_name="Тело письма")),
             ],
             options={
-                'verbose_name': 'письмо',
-                'verbose_name_plural': 'письма',
+                "verbose_name": "письмо",
+                "verbose_name_plural": "письма",
             },
         ),
     ]

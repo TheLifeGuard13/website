@@ -7,14 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('logstatus', '0005_logmessage_client_info_and_more'),
+        ("clients", "0001_initial"),
+        ("logstatus", "0005_logmessage_client_info_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='logmessage',
-            name='client_info',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET, to='clients.client', verbose_name='Письмо'),
+            model_name="logmessage",
+            name="client_info",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET,
+                to="clients.client",
+                verbose_name="Письмо",
+            ),
         ),
     ]

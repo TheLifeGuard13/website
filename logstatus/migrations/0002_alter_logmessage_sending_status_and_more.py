@@ -6,24 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('logstatus', '0001_initial'),
+        ("logstatus", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='logmessage',
-            name='sending_status',
-            field=models.TextField(verbose_name='Статус'),
+            model_name="logmessage",
+            name="sending_status",
+            field=models.TextField(verbose_name="Статус"),
         ),
         migrations.RemoveField(
-            model_name='logmessage',
-            name='client_email',
+            model_name="logmessage",
+            name="client_email",
         ),
         migrations.RemoveField(
-            model_name='logmessage',
-            name='letter_header',
+            model_name="logmessage",
+            name="letter_header",
         ),
         migrations.DeleteModel(
-            name='Status',
+            name="Status",
         ),
     ]

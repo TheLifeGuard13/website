@@ -6,5 +6,5 @@ register = template.Library()
 @register.filter()
 def my_media(data):
     if data:
-        return f'/media/{data}'
-    return f'/media/empty_avatar.jpg'
+        return f"/media/{data}"
+    return f"/media/empty_avatar.jpg"

@@ -7,23 +7,22 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, verbose_name='Имэйл клиента')),
-                ('name', models.CharField(max_length=150, verbose_name='ФИО клиента')),
-                ('comment', models.TextField(blank=True, null=True, verbose_name='Комментарий')),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='clients/', verbose_name='Аватар')),
-                ('created_at', models.DateField(auto_now_add=True, null=True, verbose_name='Дата создания')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("email", models.EmailField(max_length=254, verbose_name="Имэйл клиента")),
+                ("name", models.CharField(max_length=150, verbose_name="ФИО клиента")),
+                ("comment", models.TextField(blank=True, null=True, verbose_name="Комментарий")),
+                ("avatar", models.ImageField(blank=True, null=True, upload_to="clients/", verbose_name="Аватар")),
+                ("created_at", models.DateField(auto_now_add=True, null=True, verbose_name="Дата создания")),
             ],
             options={
-                'verbose_name': 'клиент',
-                'verbose_name_plural': 'клиенты',
+                "verbose_name": "клиент",
+                "verbose_name_plural": "клиенты",
             },
         ),
     ]

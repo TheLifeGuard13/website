@@ -8,32 +8,36 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Period',
+            name="Period",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Название периода')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=50, verbose_name="Название периода")),
             ],
             options={
-                'verbose_name': 'период',
-                'verbose_name_plural': 'периоды',
+                "verbose_name": "период",
+                "verbose_name_plural": "периоды",
             },
         ),
         migrations.CreateModel(
-            name='Mailing',
+            name="Mailing",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='имя_рассылки')),
-                ('sending_time', models.DateTimeField(auto_now_add=True, null=True, verbose_name='Время рассылки')),
-                ('period', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mailing.period', verbose_name='Период')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=150, verbose_name="имя_рассылки")),
+                ("sending_time", models.DateTimeField(auto_now_add=True, null=True, verbose_name="Время рассылки")),
+                (
+                    "period",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="mailing.period", verbose_name="Период"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'рассылка',
-                'verbose_name_plural': 'рассылки',
+                "verbose_name": "рассылка",
+                "verbose_name_plural": "рассылки",
             },
         ),
     ]

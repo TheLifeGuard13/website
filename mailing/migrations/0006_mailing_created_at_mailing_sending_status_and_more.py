@@ -6,25 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('logstatus', '0005_logmessage_client_info_and_more'),
-        ('mailing', '0005_remove_mailing_letter_header_mailing_letter_and_more'),
+        ("clients", "0001_initial"),
+        ("logstatus", "0005_logmessage_client_info_and_more"),
+        ("mailing", "0005_remove_mailing_letter_header_mailing_letter_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mailing',
-            name='created_at',
-            field=models.DateField(auto_now_add=True, null=True, verbose_name='Дата создания'),
+            model_name="mailing",
+            name="created_at",
+            field=models.DateField(auto_now_add=True, null=True, verbose_name="Дата создания"),
         ),
         migrations.AddField(
-            model_name='mailing',
-            name='sending_status',
-            field=models.ManyToManyField(blank=True, null=True, to='logstatus.logmessage', verbose_name='Статус'),
+            model_name="mailing",
+            name="sending_status",
+            field=models.ManyToManyField(blank=True, null=True, to="logstatus.logmessage", verbose_name="Статус"),
         ),
         migrations.AlterField(
-            model_name='mailing',
-            name='client_emails',
-            field=models.ManyToManyField(to='clients.client', verbose_name='Имэйлы'),
+            model_name="mailing",
+            name="client_emails",
+            field=models.ManyToManyField(to="clients.client", verbose_name="Имэйлы"),
         ),
     ]

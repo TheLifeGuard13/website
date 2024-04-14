@@ -5,4 +5,8 @@ from logstatus.models import LogMessage
 
 @admin.register(LogMessage)
 class LogMessageAdmin(admin.ModelAdmin):
-    list_display = ('last_try', 'sending_status', 'id_mailing',)
+    list_display = (
+        "last_try",
+        "sending_status",
+        "id_mailing",
+    )

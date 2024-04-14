@@ -19,13 +19,14 @@
                     <li>Владелец: {{ object.owner }}</li>
                     <li>Клиенты: {% for client in object.client_emails.all %} {{ client.email }}</li> {% endfor %}
                 </ul>
-
+                {% if user.is_superuser or user == object.owner %}
                 <div class="mb-3">
                     <a href="{% url 'mailing:update_mailing' object.pk %}" class="w-100 btn btn-lg btn-outline-primary">Редактировать</a>
                 </div>
                 <div class="mb-3">
                     <a href="{% url 'mailing:delete_mailing' object.pk %}" class="w-100 btn btn-lg btn-outline-primary">Удалить</a>
                 </div>
+                {% endif %}
                 <div class="mb-3">
                     <a href="{% url 'mailing:mailing_page' %}" class="w-100 btn btn-lg btn-outline-primary">Обратно</a>
                 </div>

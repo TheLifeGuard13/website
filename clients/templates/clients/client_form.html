@@ -17,11 +17,11 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="mb-3">
-                        <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Создать</button>
+                        <button type="submit" class="w-100 btn btn-lg btn-outline-primary">Сохранить</button>
                     </div>
                     <div class="mb-3">
                         <a href="{% url 'clients:clients_page' %}"
-                           class="w-100 btn btn-lg btn-outline-primary">Отмена</a>
+                           class="w-100 btn btn-lg btn-outline-primary">Обратно</a>
                     </div>
                 </form>
             </div>

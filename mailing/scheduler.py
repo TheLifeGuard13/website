@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta
-
-from apscheduler.triggers.cron import CronTrigger
-from django.conf import settings
+from datetime import timedelta, datetime
 
 from apscheduler.schedulers.blocking import BlockingScheduler
-from django_apscheduler.jobstores import DjangoJobStore
+from apscheduler.triggers.cron import CronTrigger
+from django.conf import settings
 from django.utils import timezone
+from django_apscheduler.jobstores import DjangoJobStore
 
 from mailing.models import Mailing
 from mailing.services import start_mailing
@@ -13,7 +12,7 @@ from mailing.services import start_mailing
 
 def filter_mailing(obj):
     now = timezone.localtime(timezone.now())
-
+    print(now)
     if obj.start_datetime < now < obj.end_datetime:
 
         if not obj.next_sending_time:
@@ -21,7 +20,9 @@ def filter_mailing(obj):
                 obj.next_sending_time = obj.first_sending_time
             else:
                 if now.time() > obj.first_sending_time.time():
-                    obj.next_sending_time = datetime.combine(now.date() + timedelta(days=1), obj.first_sending_time.time())
+                    obj.next_sending_time = datetime.combine(
+                        now.date() + timedelta(days=1), obj.first_sending_time.time()
+                    )
                 obj.next_sending_time = datetime.combine(now.date(), obj.first_sending_time.time())
             obj.save()
 
@@ -46,7 +47,6 @@ def sending_tasks():
     if mailings.exists():
         for mailing in mailings:
             if mailing.is_active:
-                print(mailing.name)
                 filter_mailing(mailing)
 
 
@@ -55,8 +55,9 @@ def start_scheduler():
     scheduler.add_jobstore(DjangoJobStore(), "default")
     print("Starting scheduler...")
 
-    scheduler.add_job(sending_tasks, trigger=CronTrigger(minute='*/1'), id="sending_tasks",
-                      max_instances=1, replace_existing=True)
+    scheduler.add_job(
+        sending_tasks, trigger=CronTrigger(minute="*/1"), id="sending_tasks", max_instances=1, replace_existing=True
+    )
 
     try:
         scheduler.start()

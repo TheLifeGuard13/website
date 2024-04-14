@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mailing', '0009_remove_mailing_sending_status_delete_logstatus'),
+        ("mailing", "0009_remove_mailing_sending_status_delete_logstatus"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='mailing',
-            name='created_at',
-            field=models.DateTimeField(auto_now_add=True, null=True, verbose_name='Дата создания'),
+            model_name="mailing",
+            name="created_at",
+            field=models.DateTimeField(auto_now_add=True, null=True, verbose_name="Дата создания"),
         ),
     ]

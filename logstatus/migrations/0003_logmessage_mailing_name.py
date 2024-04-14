@@ -7,14 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('logstatus', '0002_alter_logmessage_sending_status_and_more'),
-        ('mailing', '0005_remove_mailing_letter_header_mailing_letter_and_more'),
+        ("logstatus", "0002_alter_logmessage_sending_status_and_more"),
+        ("mailing", "0005_remove_mailing_letter_header_mailing_letter_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='logmessage',
-            name='mailing_name',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET, to='mailing.mailing', verbose_name='Имя рассылки'),
+            model_name="logmessage",
+            name="mailing_name",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET,
+                to="mailing.mailing",
+                verbose_name="Имя рассылки",
+            ),
         ),
     ]

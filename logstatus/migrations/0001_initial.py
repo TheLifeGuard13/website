@@ -9,35 +9,53 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('letters', '0001_initial'),
+        ("clients", "0001_initial"),
+        ("letters", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Status',
+            name="Status",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Статус')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=50, verbose_name="Статус")),
             ],
             options={
-                'verbose_name': 'статус',
-                'verbose_name_plural': 'статусы',
+                "verbose_name": "статус",
+                "verbose_name_plural": "статусы",
             },
         ),
         migrations.CreateModel(
-            name='LogMessage',
+            name="LogMessage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_try', models.DateTimeField(auto_now_add=True, null=True, verbose_name='Время последней попытки')),
-                ('server_answer', models.TextField(blank=True, null=True, verbose_name='Ответ сервера')),
-                ('client_email', models.ForeignKey(on_delete=django.db.models.deletion.SET, to='clients.client', verbose_name='Имэйл клиента')),
-                ('letter_header', models.ForeignKey(on_delete=django.db.models.deletion.SET, to='letters.letter', verbose_name='Тема письма')),
-                ('sending_status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='logstatus.status', verbose_name='Статус')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "last_try",
+                    models.DateTimeField(auto_now_add=True, null=True, verbose_name="Время последней попытки"),
+                ),
+                ("server_answer", models.TextField(blank=True, null=True, verbose_name="Ответ сервера")),
+                (
+                    "client_email",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.SET, to="clients.client", verbose_name="Имэйл клиента"
+                    ),
+                ),
+                (
+                    "letter_header",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.SET, to="letters.letter", verbose_name="Тема письма"
+                    ),
+                ),
+                (
+                    "sending_status",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="logstatus.status", verbose_name="Статус"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'лог',
-                'verbose_name_plural': 'логи',
+                "verbose_name": "лог",
+                "verbose_name_plural": "логи",
             },
         ),
     ]

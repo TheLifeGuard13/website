@@ -1,10 +1,8 @@
 from django.urls import path
 
 from blog.apps import BlogConfig
-from blog.views import index
+from blog.views import BlogListView
 
 app_name = BlogConfig.name
 
-urlpatterns = [
-    path('', index, name='blog_page')
-]
+urlpatterns = [path("", BlogListView.as_view(), name="blog_page")]

@@ -6,46 +6,46 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0001_initial'),
+        ("website", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='logmessage',
-            name='client_email',
+            model_name="logmessage",
+            name="client_email",
         ),
         migrations.RemoveField(
-            model_name='logmessage',
-            name='letter_header',
+            model_name="logmessage",
+            name="letter_header",
         ),
         migrations.RemoveField(
-            model_name='logmessage',
-            name='sending_status',
+            model_name="logmessage",
+            name="sending_status",
         ),
         migrations.RemoveField(
-            model_name='mailing',
-            name='settings',
+            model_name="mailing",
+            name="settings",
         ),
         migrations.RemoveField(
-            model_name='mailingsettings',
-            name='period',
+            model_name="mailingsettings",
+            name="period",
         ),
         migrations.DeleteModel(
-            name='Client',
+            name="Client",
         ),
         migrations.DeleteModel(
-            name='LogMessage',
+            name="LogMessage",
         ),
         migrations.DeleteModel(
-            name='Status',
+            name="Status",
         ),
         migrations.DeleteModel(
-            name='Mailing',
+            name="Mailing",
         ),
         migrations.DeleteModel(
-            name='MailingSettings',
+            name="MailingSettings",
         ),
         migrations.DeleteModel(
-            name='Period',
+            name="Period",
         ),
     ]

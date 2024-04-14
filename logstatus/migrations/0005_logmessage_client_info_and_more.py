@@ -7,19 +7,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('clients', '0001_initial'),
-        ('logstatus', '0004_remove_logmessage_mailing_name'),
+        ("clients", "0001_initial"),
+        ("logstatus", "0004_remove_logmessage_mailing_name"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='logmessage',
-            name='client_info',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET, to='clients.client', verbose_name='Письмо'),
+            model_name="logmessage",
+            name="client_info",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET,
+                to="clients.client",
+                verbose_name="Письмо",
+            ),
         ),
         migrations.AlterField(
-            model_name='logmessage',
-            name='sending_status',
-            field=models.CharField(max_length=1, verbose_name='Статус'),
+            model_name="logmessage",
+            name="sending_status",
+            field=models.CharField(max_length=1, verbose_name="Статус"),
         ),
     ]

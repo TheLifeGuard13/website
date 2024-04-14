@@ -5,7 +5,7 @@ from users.models import User
 
 
 class CustomPermissionAdmin(admin.ModelAdmin):
-    list_display = ['name', 'content_type']
+    list_display = ["name", "content_type"]
 
 
 admin.site.register(Permission, CustomPermissionAdmin)

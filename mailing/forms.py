@@ -8,14 +8,18 @@ from website.forms import StyleFormMixin
 class MailingForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Mailing
-        exclude = ('owner', 'status', 'next_sending_time', )
+        exclude = (
+            "owner",
+            "status",
+            "next_sending_time",
+        )
         widgets = {
-            'first_sending_time': DateTimeInput(attrs={'type': 'datetime-local'}),
-            'start_datetime': DateTimeInput(attrs={'type': 'datetime-local'}),
-            'end_datetime': DateTimeInput(attrs={'type': 'datetime-local'}),
+            "first_sending_time": DateTimeInput(attrs={"type": "datetime-local"}),
+            "start_datetime": DateTimeInput(attrs={"type": "datetime-local"}),
+            "end_datetime": DateTimeInput(attrs={"type": "datetime-local"}),
         }
         labels = {
-            'sending_time': 'Время рассылки',
-            'start_datetime': 'Время начала',
-            'end_datetime': 'Время конца',
+            "sending_time": "Время рассылки",
+            "start_datetime": "Время начала",
+            "end_datetime": "Время конца",
         }

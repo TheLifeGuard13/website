@@ -6,13 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mailing', '0017_alter_mailing_owner'),
+        ("mailing", "0017_alter_mailing_owner"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='mailing',
-            name='status',
-            field=models.CharField(blank=True, choices=[('Создана', 'Создана'), ('Запущена', 'Запущена'), ('Завершена', 'Завершена')], default='Создана', max_length=20, null=True, verbose_name='Статус'),
+            model_name="mailing",
+            name="status",
+            field=models.CharField(
+                blank=True,
+                choices=[("Создана", "Создана"), ("Запущена", "Запущена"), ("Завершена", "Завершена")],
+                default="Создана",
+                max_length=20,
+                null=True,
+                verbose_name="Статус",
+            ),
         ),
     ]

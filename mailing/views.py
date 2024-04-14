@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from mailing.forms import MailingForm
 from mailing.models import Mailing
@@ -11,11 +11,11 @@ from mailing.services import start_mailing
 
 class MailingListView(LoginRequiredMixin, ListView):
     model = Mailing
-    login_url = reverse_lazy('website:homepage')
+    login_url = reverse_lazy("website:homepage")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Рассылки'
+        context["title"] = "Рассылки"
         return context
 
     def get_queryset(self, *args, **kwargs):
@@ -40,23 +40,23 @@ class MailingDetailView(DetailView):
 
         user = self.request.user
         if not user.is_superuser and self.object.owner != user and not user.groups.filter(name="manager"):
-            raise Http404('Доступ запрещен')
+            raise Http404("Доступ запрещен")
         return self.object
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.object.name
+        context["title"] = self.object.name
         return context
 
 
 class MailingCreateView(CreateView):
     model = Mailing
     form_class = MailingForm
-    success_url = reverse_lazy('mailing:mailing_page')
+    success_url = reverse_lazy("mailing:mailing_page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Добавление рассылки'
+        context["title"] = "Добавление рассылки"
         return context
 
     def form_valid(self, form):
@@ -72,18 +72,18 @@ class MailingCreateView(CreateView):
 class MailingUpdateView(LoginRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
-    login_url = reverse_lazy('website:homepage')
+    login_url = reverse_lazy("website:homepage")
 
     def get_success_url(self):
-        return reverse('mailing:view_mailing', args=[self.kwargs.get('pk')])
+        return reverse("mailing:view_mailing", args=[self.kwargs.get("pk")])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Обновление рассылки'
+        context["title"] = "Обновление рассылки"
         return context
 
     def test_func(self):
-        custom_perms = ('mailing.set_inactive', )
+        custom_perms = ("mailing.set_inactive",)
         if self.request.user.groups.filter(name="manager") and self.request.user.has_perms(custom_perms):
             return True
         return self.handle_no_permission()
@@ -92,24 +92,24 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
         self.object = super().get_object(queryset)
         user = self.request.user
         if not user.is_superuser and self.object.owner != user:
-            raise Http404('Доступ запрещен')
+            raise Http404("Доступ запрещен")
         return self.object
 
 
 class MailingDeleteView(DeleteView):
     model = Mailing
-    success_url = reverse_lazy('mailing:mailing_page')
+    success_url = reverse_lazy("mailing:mailing_page")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Удаление рассылки'
+        context["title"] = "Удаление рассылки"
         return context
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         user = self.request.user
         if not user.is_superuser and self.object.owner != user:
-            raise Http404('Доступ запрещен')
+            raise Http404("Доступ запрещен")
         return self.object
 
 
@@ -121,4 +121,4 @@ def toggle_activity(request, pk):
         mailing_status.is_active = True
     mailing_status.save()
 
-    return redirect(reverse('mailing:mailing_page'))
+    return redirect(reverse("mailing:mailing_page"))

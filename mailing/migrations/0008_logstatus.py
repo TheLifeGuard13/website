@@ -7,21 +7,39 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('logstatus', '0007_remove_logmessage_client_info_logmessage_id_mailing_and_more'),
-        ('mailing', '0007_alter_mailing_sending_status'),
+        ("logstatus", "0007_remove_logmessage_client_info_logmessage_id_mailing_and_more"),
+        ("mailing", "0007_alter_mailing_sending_status"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LogStatus',
+            name="LogStatus",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('id_log', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET, to='logstatus.logmessage', verbose_name='Айди_лога')),
-                ('id_mailing', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET, to='mailing.mailing', verbose_name='Айди_рассылки')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id_log",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET,
+                        to="logstatus.logmessage",
+                        verbose_name="Айди_лога",
+                    ),
+                ),
+                (
+                    "id_mailing",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET,
+                        to="mailing.mailing",
+                        verbose_name="Айди_рассылки",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'связь_логов',
-                'verbose_name_plural': 'связи_логов',
+                "verbose_name": "связь_логов",
+                "verbose_name_plural": "связи_логов",
             },
         ),
     ]

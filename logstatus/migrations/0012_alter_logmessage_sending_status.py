@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('logstatus', '0011_remove_logmessage_server_answer'),
+        ("logstatus", "0011_remove_logmessage_server_answer"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='logmessage',
-            name='sending_status',
-            field=models.CharField(choices=[('Успешно', 'Успешно'), ('Безуспешно', 'Безуспешно')], max_length=10, verbose_name='Логстатус'),
+            model_name="logmessage",
+            name="sending_status",
+            field=models.CharField(
+                choices=[("Успешно", "Успешно"), ("Безуспешно", "Безуспешно")], max_length=10, verbose_name="Логстатус"
+            ),
         ),
     ]
